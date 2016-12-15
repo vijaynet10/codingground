@@ -1,0 +1,6 @@
+declare @TotalRows BigInt 
+Select @TotalRows  =  count(*)  from WorkPacket  
+Set @TotalRows =@TotalRows   - 10 
+Declare @Query nvarchar(Max) 
+set @Query  = 'Select * from WorkPacket   except  Select top '+cast(@TotalRows as nvarchar(max))+'  * from WorkPacket'
+exec( @Query  ) 
