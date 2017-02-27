@@ -1,0 +1,15 @@
+Create PROCEDURE USP_GetStartEndDateOFtheWeek
+    @MYDATE DateTime,
+    @StartDate SmallDateTime OUTPUT, 
+    @EndDate SmallDateTime   OUTPUT 
+AS
+BEGIN
+	SELECT @StartDate= DATEADD(DD, 1 - DATEPART(DW, @MYDATE), @MYDATE),@EndDate=DATEADD(DD, 7 - DATEPART(DW, @MYDATE), @MYDATE)
+END 
+--- Consume  Mothod 
+Declare @MYDATE DateTime 
+Declare @StartDate SmallDateTime  
+Declare @EndDate SmallDateTime   
+Set @MYDATE =getDate()    
+Exec USP_GetStartEndDateOFtheWeek  '31Dec2016', @StartDate OUTPUT, @EndDate OUTPUT
+Select @MYDATE, @StartDate [StartDate], @EndDate [EndDate]
